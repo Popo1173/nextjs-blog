@@ -1,4 +1,6 @@
 import Head from 'next/head'
+//リンクコンポーネント
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -11,6 +13,7 @@ export default function Home() {
       <main>
         <h1 className="title">
           Auto<a href="https://nextjs.org">Next.js!</a>
+          <Link href="/posts/first-post"><a>this page!</a></Link>
         </h1>
 
         <p className="description">
@@ -55,7 +58,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+          <img src="/image/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
 
