@@ -23,21 +23,29 @@ robots.txtやpwaの時はjsonも入れる
 
 ## Metadata
 import Head from 'next/head' //headコンポーネント
-ページ事に設定できる
+<Head>コンポーネントは<head>タグに変換される
+ページ事に設定できるのでSEO的にGood
 document.jsで細かい設定がある
 https://nextjs.org/docs/advanced-features/custom-document
 
+## imageファイルはpublic直下で管理する
+- publicを内の画像を参照する
+- publicをルートしてルートパスで記述する
+
 ## css
-upport for styled-jsx が初期で用意されている
+upport for styled-jsx が初期で用意されている<br>
 Layout Componentを作成する。全てのコンポーネントをラップするコンポーネント
--　Create a top-level directory　で作成する
--　layout.module.css　を作成する
--　create a file called pages/_app.js
+-　Create a top-level 「components」directoryを作成する
+-　layout.module.css　を作成する（必ず拡張子は.module.cssとする）
+-　create a file called pages/_app.js(全てのコンポーネントでCSSを読み込む)
  - _app.jsは特殊なファイルでRouteコンポーネントをラップする
  - 全ページ共通して実行させたいファイルを読み込む
  - 全ページ共通して実行させたい処理を実行する
  - 全ページ共通のレイアウトを組み込む
-
+- gloalCSSは必ず_app.jsから読み込む
+　- top-levelに「styles」directoryを作成して、gloabal.cssを作成する
+ - _app.jsにインポートする
+ 
 Component,pageProps を受け取る
 ComponentをJSXで返して、pagePropsを返却する
 export default function App({ Component, pageProps }) {
