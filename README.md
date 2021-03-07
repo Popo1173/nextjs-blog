@@ -43,8 +43,10 @@ Layout Componentを作成する。全てのコンポーネントをラップす�
  - 全ページ共通して実行させたい処理を実行する
  - 全ページ共通のレイアウトを組み込む
 - gloalCSSは必ず_app.jsから読み込む
-　- top-levelに「styles」directoryを作成して、gloabal.cssを作成する
+ - top-levelに「styles」directoryを作成して、gloabal.cssを作成する
  - _app.jsにインポートする
+- 各機能事で利用する「utils.module.css」を作成する
+  - 
  
 Component,pageProps を受け取る
 ComponentをJSXで返して、pagePropsを返却する
