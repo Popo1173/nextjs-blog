@@ -5,7 +5,7 @@ import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
 const name = 'arai'
-export const siteTitle = 'arai Next.js Sample Website'
+export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
   return (
@@ -30,7 +30,7 @@ export default function Layout({ children, home }) {
           <>
             <Image
               priority
-              src="../public/images/ensya8.png"
+              src="/images/profile.jpg"
               className={utilStyles.borderCircle}
               height={144}
               width={144}
@@ -61,7 +61,6 @@ export default function Layout({ children, home }) {
         )}
       </header>
       <main>{children}</main>
-      {/* /URLがルートでなければ backToHomeというリンクを表示しておく/ */}
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
