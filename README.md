@@ -56,14 +56,43 @@ export default function App({ Component, pageProps }) {
 
 
 ## まとめ
-layoutコンポーネントで全体をラップする
-CSS Moduleを読み込んで適用
-CSS Moduleのクラス名は自動でユニークな名前に変換される
+layoutコンポーネントで全体をラップする<br>
+CSS Moduleを読み込んで適用<br>
+CSS Moduleのクラス名は自動でユニークな名前に変換される<br>
+
+
+## Pre-rendering
+- 全ページprerenderする
+- SSRされる
+- prerender = 事前にHTMLを生成すること
+- ブラウザの負荷を下げて表示を高速化
+- 検索エンジンのクローラーにコンテンツを見せることができる
+
+・Static Generation 
+- buildした時にHTMLが生成される
+- CDNでキャッシュされてる
+- NEXTJSはこれを推奨されている
+- 更新頻度が低い（ユーザー：コンテンツ　＝　１：N）　ブログ、EC、サイトなど
+
+・Server-side Rendering
+- Userがリクエスト投げた時にHTMLが生成される
+- npm run dev　はSSRでレンダリングされている
+- 更新頻度が高い（ユーザー：コンテンツ　＝　N：N）　SNS、チャット
+
+画面によって、「Static Generation」と「Server-side Rendering」を使い分けることができる
+
+
+外部データがない時
+ビルド時にHTMLをレンダリング
+
+外部データがある時（getStaticProps()を使う）
+1.ビルド時にDBや外部APIからデータを取得
+2.取得したデータを使ってHTMLをレンダリングする
+
+https://nextjs.org/learn/basics/data-fetching/with-data
 
 
 
-
-
-
+## Data Fetching
 
 
