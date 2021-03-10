@@ -96,6 +96,10 @@ https://nextjs.org/learn/basics/data-fetching/with-data
 https://nextjs.org/learn/basics/data-fetching/blog-data
 - root直下にフォルダを用意しその中のデータも持ってくることができる
 
+npm install gray-matterで、.mdデータのtitle,dataを出力し、idをURL化してくれる
+getStaticPropsは、hotリロードされないのでリロードボタンを押下する必要がある
+
+
 ## Data Fetching
 
 
