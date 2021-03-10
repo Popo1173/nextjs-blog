@@ -78,16 +78,21 @@ CSS Moduleのクラス名は自動でユニークな名前に変換される<br>
 
 画面によって、「Static Generation」と「Server-side Rendering」を使い分けることができる
 
-
 ## 外部データがない時
 ビルド時にHTMLをレンダリング
 
-## 外部データがある時（getStaticProps()を使う）
+## getStaticProps()外部データがある時
 1.ビルド時にDBや外部APIからデータを取得
 2.取得したデータを使ってHTMLをレンダリングする
 https://nextjs.org/learn/basics/data-fetching/with-data
 
-### getSortedPostsData()でデータを取得して、getStaticProps() で呼び出す。
+### getSortedPostsData()
+外部データを取得する
+
+### getStaticProps()　Static Generationで利用する
+外部データを出力する（Static Generation ）
+
+### getSortedPostsData()でデータを取得して、getStaticProps()で呼び出す。
 - 外部データを取得する
 - async/awaitを使って非同期処理を制御できる(export async function getStaticProps() {})
 - 本番環境ではビルド時に実行される関数
@@ -98,18 +103,59 @@ https://nextjs.org/learn/basics/data-fetching/blog-data
 npm install gray-matterで、.mdデータのtitle,dataを出力し、idをURL化してくれる
 getStaticPropsは、hotリロードされないのでリロードボタンを押下する必要がある
 
+buildした時は、getStaticProps関数で、getSortedPostsData()でデータを取得する
+```
+import { getSortedPostsData } from '../lib/posts'
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+```
+## Data Fetching
 ### 外部APIまたはクエリデータベースを取得する
-```java:title
+他のソースからデータをフェッチすることはできます
+```
 export async function getSortedPostsData() {
   // Instead of the file system,
-  // fetch post data from an external API endpoint
+  // fetch()でデータを取得して、awaitして取得完了したらresに入る
   const res = await fetch('..')
+  // データをjsonで返す
   return res.json()
 }
 ```
 
+## getServerSideProps()　SSRの時に利用する
+- リクエスト事に実行される関数
+- ServerSideRenderingのために使う
+- 外部データを取得するために使う
+- async/awaitを使って非同期処理を実行できる
+- pageコンポーネントでのみ使用可能
+```
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    }
+  }
+}
+```
+
+## SWR
+クライアントサイドレンダリングのhooks 
+- Next.jsで用意されているSWRというhooks
+- クライアントサイトでデータを取得するなら使用を推奨
+- 取得したデータを{key:value}の形でキャッシュできる
+- Real-timeでデータ更新(データの再fetch)
+- JAMstack指向
+https://swr.vercel.app/
 
 
-## Data Fetching
+
+
 
 
