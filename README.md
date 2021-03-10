@@ -107,7 +107,6 @@ getStaticPropsは、hotリロードされないのでリロードボタンを押
 }```
 
 
-
 ## Data Fetching
 
 
