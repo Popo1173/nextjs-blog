@@ -87,7 +87,7 @@ CSS Moduleのクラス名は自動でユニークな名前に変換される<br>
 2.取得したデータを使ってHTMLをレンダリングする
 https://nextjs.org/learn/basics/data-fetching/with-data
 
-### getStaticProps()でデータ取得
+### getSortedPostsData()でデータを取得して、getStaticProps() で呼び出す。
 - 外部データを取得する
 - async/awaitを使って非同期処理を制御できる(export async function getStaticProps() {})
 - 本番環境ではビルド時に実行される関数
@@ -98,6 +98,15 @@ https://nextjs.org/learn/basics/data-fetching/blog-data
 npm install gray-matterで、.mdデータのtitle,dataを出力し、idをURL化してくれる
 getStaticPropsは、hotリロードされないのでリロードボタンを押下する必要がある
 
+### 外部APIまたはクエリデータベースを取得する
+,,,
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..')
+  return res.json()
+}
+,,,
 
 
 
