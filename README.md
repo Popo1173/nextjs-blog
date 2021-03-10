@@ -1,7 +1,6 @@
 # nextjs-blog
 
 
-
 ##  
 pages/index.js is associated with the / route.<br>
 pages/posts/first-post.js is associated with the /posts/first-post route.<br>
@@ -98,6 +97,8 @@ https://nextjs.org/learn/basics/data-fetching/blog-data
 
 npm install gray-matterで、.mdデータのtitle,dataを出力し、idをURL化してくれる
 getStaticPropsは、hotリロードされないのでリロードボタンを押下する必要がある
+
+
 
 
 ## Data Fetching
