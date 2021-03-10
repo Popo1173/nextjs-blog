@@ -129,7 +129,7 @@ export async function getSortedPostsData() {
 }
 ```
 
-## getServerSideProps()　SSRの時に利用する
+### getServerSideProps()　SSRの時に利用する
 - リクエスト事に実行される関数
 - ServerSideRenderingのために使う
 - 外部データを取得するために使う
@@ -145,7 +145,7 @@ export async function getServerSideProps(context) {
 }
 ```
 
-## SWR
+### SWR
 クライアントサイドレンダリングのhooks 
 - Next.jsで用意されているSWRというhooks
 - クライアントサイトでデータを取得するなら使用を推奨
@@ -154,7 +154,7 @@ export async function getServerSideProps(context) {
 - JAMstack指向
 https://swr.vercel.app/
 
-
+## ダイナミックルーティング
 
 
 
