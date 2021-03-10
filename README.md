@@ -99,14 +99,12 @@ npm install gray-matterで、.mdデータのtitle,dataを出力し、idをURL化
 getStaticPropsは、hotリロードされないのでリロードボタンを押下する必要がある
 
 ### 外部APIまたはクエリデータベースを取得する
-,,,
-export async function getSortedPostsData() {
+```export async function getSortedPostsData() {
   // Instead of the file system,
   // fetch post data from an external API endpoint
   const res = await fetch('..')
   return res.json()
-}
-,,,
+}```
 
 
 
