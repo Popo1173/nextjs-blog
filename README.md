@@ -155,6 +155,85 @@ export async function getServerSideProps(context) {
 https://swr.vercel.app/
 
 ## ダイナミックルーティング
+ー　DynamicRoutes用ファイルを作成する
+ー　ファイル名から動的なURLを作成する
+ー　getStaticPathsで静的なファイルを生成する
+ー　リンクする
+
+DynamicRoutes用ファイルを作成する
+ファイル名に[]を使う
+└　pages/posts/[id].js
+　└　https://..../pages/posts/pre-rendering
+ 
+ {id: pre-rendering} からidをページ名にしていく
+pages/posts/[id].jsを作成する
+
+
+ファイル名から動的なURLを作成する
+lib/posts.jsにgetStaticPaths()を追記する
+プロパティには必ず「params」が必要となり、valueがオブジェクト
+```
+//ファイル名からIDを取得する関数
+export function getAllPostIds() {
+  //root のpostsディクレトリパスとファイルを取得
+  const fileNames = fs.readdirSync(postsDirectory)
+
+  // Returns an array that looks like this:
+  　　//配列にオブジェクトがある
+  // [
+  //   {
+  //     params: {
+  //       id: 'ssg-ssr'
+  //     }
+  //   },
+  //   {
+  //     params: {
+  //       id: 'pre-rendering'
+  //     }
+  //   }
+  // ]
+  //mapでファイル名を回す
+  return fileNames.map(fileName => {
+    return {
+      //key params valueオブジェクト
+      //.mdを削除
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    }
+  })
+}
+}
+``` 
+
+getStaticPathsで静的なファイルを生成する
+pages/posts/[id].jsに「import { getAllPostIds } from '../../lib/posts'」をインポート
+``` 
+import { getAllPostIds } from '../../lib/posts'
+
+export async function getStaticPaths() {
+  const paths = getAllPostIds()
+  return {
+    paths,//配列にオブジェクトが入ってくる
+    fallback: false　//指定がないものは404を返す（true なら事前作成したファイルを返す）
+  }
+}
+↓pathsに入ってくるオブジェクト
+[
+ {params: {id: 'ssg-ssr'}},
+ {params: {id: 'pre-rendering'}},
+]
+
+
+``` 
+getAllPostIds()でファイル名からIDを取得する
+```
+export function getAllPostIds() {
+}
+```
+
+
+
 
 
 
