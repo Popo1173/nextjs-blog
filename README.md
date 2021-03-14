@@ -25,9 +25,8 @@ npm run dev
 inde.jsがエントリーポイントになる
 
 
-# ページ作成
-pagesディレクトリの下にJSファイルを作成するだけで、ファイルへのパスがURLパスになります。<br>
------
+# ページ編集
+pagesディレクトリの下にJSファイルを作成するだけで、ファイルへのパスがURLパスになります。  
 PJディレクトリ
 └pages
 
@@ -55,6 +54,85 @@ import Link from 'next/link'
 最上位ディレクトリの下で、画像などの静的アセットを提供できる。<br>
 この`public`ディレクトリは`robots.txt`、Googleサイト検証やその他の静的アセットにも役立ちます。  
 詳細については、[静的ファイルサービングのドキュメント](https://nextjs.org/docs/basic-features/static-file-serving)を確認してください。  
+
+### 画像
+- ユーザーの要求に応じてオンデマンドでイメージを最適化します。
+- [WebP](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types#webp_image)が利用できる  
+- 画像は、ビューポートにスクロールされると読み込まれます。
+- [自動画像最適化の詳細](https://nextjs.org/docs/basic-features/image-optimization)
+PJディレクトリ  
+└public  
+ └ images //
+
+```
+import Image from 'next/image'
+
+//画像ソース
+const YourComponent = () => (
+  <Image
+    src="/images/profile.jpg" // Route of the image file
+    height={144} // Desired size with correct aspect ratio
+    width={144} // Desired size with correct aspect ratio
+    alt="Your Name"
+  />
+)
+
+```
+
+## メタデータ
+```
+//モジュールHeadからコンポーネントをインポート
+import Head from 'next/head'
+
+export default function ComponentName() {
+  return (
+    <>
+      <Head>
+        <title>First Post</title>
+      </Head>
+```
+
+## CSS
+styled-jsxというライブラリを使用しています。(Next.jsにはstyled-jsxのサポートが組み込まれています)  
+Reactコンポーネント内でCSSを記述でき、CSSスタイルのスコープが設定されます（他のコンポーネントは影響を受けません）。
+```
+<style jsx>{`
+  …
+`}</style>
+```
+Next.jsには、CSSとSassのサポートが組み込まれており.css、.scssファイルをインポートできます。
+
+## ★レイアウトコンポーネント★
+すべてのページで共有されるレイアウトコンポーネント  
+内部にcomponents、layout.js次の内容で呼び出されるファイルを作成します。
+```
+export default function Layout({ children }) {
+  return <div>{children}</div>
+}
+```
+他コンポーネントでレイアウトコンポーネントをインポートして利用する
+```
+import Layout from '../../components/layout'
+```
+
+### layoutコンポーネントでCSSを利用する
+`重要：<br>
+CSSモジュールを使用するには、CSSファイル名の末尾が「.module.css」である必要があります。
+同ディレクトリ内に「.module.css」を配置して利用する
+`
+```
+//layout.module.css　インポート
+import styles from './layout.module.css'
+
+export default function Layout({ children }) {
+  //スタイルを当てる場合はclassName={style.CSSクラス名}となる
+  return <div className={styles.container}>{children}</div>
+}
+```
+- CSSモジュールを利用することで、自動的に一意のクラス名を生成します。  
+- CSSモジュールを使用している限り、クラス名の衝突について心配する必要はありません。
+- ページごとに最小限のCSSがロードされます。これにより、バンドルサイズが小さくなります。
+```<div class="layout_component_2tv34"}>{children}</div>```
 
 
 
