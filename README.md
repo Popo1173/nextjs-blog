@@ -11,9 +11,53 @@
 - サーバーレス関数を使用してAPIエンドポイントを構築するためのAPIルート
 - 完全に拡張可能
 
+
 # セットアップ
+公式ドキュメントで学習するにあたりさんぷるファイルを利用している　→ https://github.com/vercel/next-learn-starter/tree/master/learn-starter<br>
+```
+//PJのクリエイト
 npx create-next-app Your-PjName
+//PJ実行
 npm run dev
+```
+
+# ページ編集
+inde.jsがエントリーポイントになる
+
+
+# ページ作成
+pagesディレクトリの下にJSファイルを作成するだけで、ファイルへのパスがURLパスになります。<br>
+-----
+PJディレクトリ
+└pages
+
+
+# リンクコンポーネント
+JSを利用して画面遷移することで、ブラウザがページ全体をロードせず、必要なDOMだけが描き変わる<br>
+各ページはそのページに必要なものだけをロードします。<br>
+
+- index.js にlinkコンポーネントをインポートする
+- Linkコンポーネントは<a>タグの使用に似ているが、<Link href="…">して<a>内部に配置する<br>
+ 
+```
+import Link from 'next/link'
+//リンクコード
+  <Link href="/posts/first-post">
+    <a>this page!</a>
+  </Link>
+
+```
+
+
+# アセット、メタデータ、CSS
+
+## アセット
+最上位ディレクトリの下で、画像などの静的アセットを提供できる。<br>
+この`public`ディレクトリは`robots.txt`、Googleサイト検証やその他の静的アセットにも役立ちます。  
+詳細については、[静的ファイルサービングのドキュメント](https://nextjs.org/docs/basic-features/static-file-serving)を確認してください。  
+
+
+
 
 
 ##  
