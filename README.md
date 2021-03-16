@@ -371,7 +371,86 @@ export function getAllPostIds() {
 
 
 
+## .mdファイルをHTML変換するあれこれを追記必要
+## await とか6-1or2の動画
 
 
 
+## 日付のフォーマット
+日付をフォーマットするには、date-fnsライブラリを使用します。まず、インストールします。
+`npm install date-fns`
+
+コンポーネント直下にdate.jsコンポーントを作成する  
+```
+import { parseISO, format } from 'date-fns'
+//分割代入させる
+export default function Date({ dateString }) {
+  const date = parseISO(dateString)
+  return <time dateTime={dateString}>{format(date, 'LLLL d, yyyy')}</time>
+}
+```
+
+[id].jsに  dateコンポーネントを入れる
+`import Date from '../../components/date'`
+`<Date dateString={postData.date} />`として配置する
+ 結果：　2020-01-01 ⇨　January 1, 2020　になる
+
+
+## 外部APIまたはクエリデータベースを取得する
+```
+export async function getAllPostIds() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..')
+  const posts = await res.json()
+  return posts.map(post => {
+    return {
+      params: {
+        id: post.id
+      }
+    }
+  })
+}
+```
+
+getStaticPathsは、buildした時にデータを取得するが、開発環境ではbildしないため、SSと同じ動きになる　　
+
+fallbackでfalse、404ページを返す。　　
+fallbackでtureであれば、指定の画面を返すことができる。オプションが選べる。　　
+```
+export async function getStaticPaths() {
+    const paths = getAllPostIds()
+    return {
+      paths,
+      fallback: false　//ここ
+    }
+  }
+```
+
+## Catch-all Routes
+動的ルートはファイル名の[]内に（...）を追加することで、すべてのパスをキャッチするように拡張できます.  
+[...id].js
+階層が深くできる
+pages/posts/[...id].js matches /posts/a, but also /posts/a/b, /posts/a/b/c and so on.
+
+
+getAllPostIds（）でファイル名を配列にする
+```
+//getStaticPaths、次のidようにキーの値として配列を返す必要があります。
+return [
+  {
+    params: {
+      // Statically Generates /posts/a/b/c
+      //配列で階層構造する
+      id: ['a', 'b', 'c']
+    }
+  }
+  //...
+]
+```
+[id].js →　[...id].jsにする　　
+getStaticProps（）で、
+```
+//params.id.join('/')で連結させる
+const postData = await getPostData(params.id.join('/'))```
 
