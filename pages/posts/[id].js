@@ -2,6 +2,9 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
+import Date from '../../components/date'
+import utilStyles from '../../styles/utils.module.css'
+
 
 export default function Post({ postData }) {
     return (
@@ -9,14 +12,13 @@ export default function Post({ postData }) {
       <Head>
         <title>{postData.title}</title>
       </Head>          
-        {postData.title}
-        <br />
-        {postData.id}
-        <br />
-        {postData.date}
-        <br />
-        {/* divの中に postData　をHTMLとして展開する*/}
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateString={postData.date} />
+        </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
       </Layout>
     )
   }
@@ -33,6 +35,8 @@ export async function getStaticPaths() {
 //データの中身を取得する関数
 export async function getStaticProps({ params }) {
     const postData = await getPostData(params.id)
+    //params.id.join('/')で連結させる
+    // const postData = await getPostData(params.id.join('/'))
     return {
       props: {
           //オブジェクト
