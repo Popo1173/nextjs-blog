@@ -452,5 +452,30 @@ return [
 getStaticProps（）で、
 ```
 //params.id.join('/')で連結させる
-const postData = await getPostData(params.id.join('/'))```
+const postData = await getPostData(params.id.join('/'))
+```
 
+## APIを作成してみる
+node.jsを使って作成する endポイントをつくれる
+サーバーレスファンクション(firebase, AWS Lambdas)
+```
+//引数req, resに関数を書いていく
+export default function handler(req, res) {
+  // ...
+}
+```
+reqはhttp.IncomingMessageのインスタンスであり、それに加えて、ここで確認できるいくつかのビルド済みミドルウェアです　　
+resはhttp.ServerResponseのインスタンスであり、さらにここに表示されるいくつかのヘルパー関数があります。
+
+### べからず
+getStaticProps、getStaticPathsからAPIルートを描かない
+└これはサーバー側で動いているため
+
+### 動的APIルーティング
+pages/api/post/[pid].jsを作成する
+```
+export default function handler(req, res) {
+  const { pid } = req.query
+  res.end(`Post: ${pid}`)
+}
+```
